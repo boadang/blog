@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  },
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boadang/blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boadang/blog/issues"
+  },
+  "homepage": "https://github.com/boadang/blog#readme",
+  "description": ""
+}
