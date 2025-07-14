@@ -1,0 +1,28 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "resource/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon resource/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boadang/blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boadang/blog/issues"
+  },
+  "homepage": "https://github.com/boadang/blog#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "morgan": "^1.10.0"
+  }
+}
