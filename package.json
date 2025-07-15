@@ -4,7 +4,9 @@
   "main": "resource/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon resource/index.js"
+    "start": "nodemon resource/index.js",
+    "sass": "sass -w resource/src/scss/ resource/public/css/",
+    "sass:watch": "sass --watch src/scss:public/css"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,8 @@
   "homepage": "https://github.com/boadang/blog#readme",
   "description": "",
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "sass": "^1.89.2"
   },
   "dependencies": {
     "express": "^5.1.0",
