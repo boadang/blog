@@ -1,31 +1,47 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "main": "resource/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon resource/index.js",
-    "sass": "sass -w resource/src/scss/ resource/public/css/",
-    "sass:watch": "sass --watch src/scss:public/css"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/boadang/blog.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/boadang/blog/issues"
-  },
-  "homepage": "https://github.com/boadang/blog#readme",
-  "description": "",
-  "devDependencies": {
-    "nodemon": "^3.1.10",
-    "sass": "^1.89.2"
-  },
-  "dependencies": {
-    "express": "^5.1.0",
-    "express-handlebars": "^8.0.3",
-    "morgan": "^1.10.0"
-  }
+    "name": "blog",
+    "version": "1.0.0",
+    "main": "resource/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon resource/index.js",
+        "sass": "sass -w resource/src/scss/ resource/public/css/",
+        "sass:watch": "sass --watch src/scss:public/css",
+        "beautify": "lint-staged"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/boadang/blog.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/boadang/blog/issues"
+    },
+    "homepage": "https://github.com/boadang/blog#readme",
+    "description": "",
+    "lint-staged": {
+        "**/*.{js,json,css,scss,html}": [
+            "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+        ]
+    },
+
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged"
+      }
+    },
+
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.2",
+        "nodemon": "^3.1.10",
+        "prettier": "^3.6.2",
+        "sass": "^1.89.2"
+    },
+    "dependencies": {
+        "express": "^5.1.0",
+        "express-handlebars": "^8.0.3",
+        "morgan": "^1.10.0"
+    }
 }
