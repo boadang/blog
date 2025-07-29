@@ -1,0 +1,53 @@
+<div class="mt-4">
+    <h1>Update Course</h1>
+
+    {{!-- ACTION CỦA FORM:
+        - Đảm bảo trỏ đến URL của course cụ thể bằng ID (ví dụ: /courses/{{course._id}})
+        - Dùng method="POST" kết hợp với hidden input _method để method-override biến thành PUT
+    --}}
+    <form class="mt-4" method="POST" action="/courses/{{course._id}}?_method=PUT">
+
+        <div class="form-group mt-4">
+            <label for="name">Course Name</label>
+            {{!-- Tự động điền giá trị hiện tại của course.name --}}
+            <input type="text" name="name" class="form-control" id="name" value="{{course.name}}" placeholder="Enter course name">
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="description">Description</label>
+            {{!-- Tự động điền giá trị hiện tại của course.description --}}
+            <textarea name="description" class="form-control" id="description" rows="5" placeholder="Enter course description">{{course.description}}</textarea>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="videoId">YouTube Video ID</label>
+            {{!-- Tự động điền giá trị hiện tại của course.videoId --}}
+            <input type="text" name="videoId" class="form-control" id="videoId" value="{{course.videoId}}" placeholder="Enter YouTube video ID">
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="image">Image URL</label>
+            {{!-- Tự động điền giá trị hiện tại của course.image --}}
+            <input type="text" name="image" class="form-control" id="image" value="{{course.image}}" placeholder="Enter image URL">
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="level">Level</label>
+            {{!-- Tự động điền giá trị hiện tại của course.level --}}
+            <input type="text" name="level" class="form-control" id="level" value="{{course.level}}" placeholder="Enter course level (e.g., Beginner, Intermediate)">
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="slug">Course Slug</label>
+            {{!-- Tự động điền giá trị hiện tại của course.slug --}}
+            <input type="text" name="slug" class="form-control" id="slug" value="{{course.slug}}" placeholder="Enter course slug">
+            <small class="form-text text-muted">This will be part of the course URL (e.g., /courses/your-course-slug)</small>
+        </div>
+
+        {{!-- Hidden input để method-override nhận diện đây là yêu cầu PUT --}}
+        <input type="hidden" name="_method" value="PUT">
+
+        <button type="submit" class="btn btn-primary mt-4">Save Changes</button>
+        <a href="/courses/listCourses" class="btn btn-secondary mt-4 ms-2">Cancel</a>
+    </form>
+</div>

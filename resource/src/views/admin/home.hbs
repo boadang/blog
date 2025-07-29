@@ -1,0 +1,99 @@
+<div class="mt-4">
+    <h2>All Courses</h2>
+
+    {{!-- Button to add new course --}}
+    <a href="/courses/create" class="btn btn-success mb-3">Add New Course</a>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Video ID</th>  
+                <th scope="col">Image</th>     
+                <th scope="col">Level</th>     
+                <th scope="col">Created At</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>
+                    <a href="/courses/{{this.slug}}" class="text-decoration-none text-dark">
+                        {{this.name}}
+                    </a>
+                </td>
+                <td>{{this.description}}</td>
+                <td>{{this.videoId}}</td> {{!-- Dữ liệu cho cột Video ID --}}
+                <td>
+                    {{#if this.image}} {{!-- Kiểm tra nếu có ảnh thì mới hiển thị --}}
+                        <img src="{{this.image}}" alt="{{this.name}}" style="max-width: 100px; height: auto;">
+                    {{else}}
+                        N/A
+                    {{/if}}
+                </td> {{!-- Dữ liệu cho cột Image --}}
+                <td>{{this.level}}</td> {{!-- Dữ liệu cho cột Level --}}
+                <td>{{this.createdAt}}</td>
+                <td>
+                    <a href="/courses/{{this._id}}/edit" class="btn btn-primary btn-sm">Update</a> 
+                    <a href="#" class="btn btn-danger btn-sm" 
+                       data-bs-toggle="modal" data-bs-target="#deleteCourseModal"
+                       data-id="{{this._id}}">Delete</a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="8">No courses found yet.</td> {{!-- Cập nhật colspan cho số cột mới --}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Delete Confirmation Modal và Hidden Form (giữ nguyên) --}}
+<div class="modal fade" id="deleteCourseModal" tabindex="-1" aria-labelledby="deleteCourseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteCourseModalLabel">Delete Course?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this course? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-course-form" method="POST" style="display: none;">
+    <input type="hidden" name="_method" value="DELETE">
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var deleteCourseModal = document.getElementById('deleteCourseModal');
+        var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        var deleteForm = document.forms['delete-course-form'];
+        var courseId;
+
+        deleteCourseModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            courseId = button.getAttribute('data-id');
+        });
+
+        confirmDeleteBtn.addEventListener('click', function() {
+            console.log('Deleting course with ID:', courseId);
+            if (courseId) {
+                deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
+                deleteForm.submit();
+            }
+        });
+    });
+</script>

@@ -5,8 +5,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon resource/index.js",
-        "sass": "sass -w resource/src/scss/ resource/public/css/",
-        "sass:watch": "sass --watch src/scss:public/css",
+        "sass": "sass --watch resource/src/scss:resource/public/css",
         "beautify": "lint-staged"
     },
     "repository": {
@@ -25,23 +24,27 @@
             "prettier --single-quote --trailing-comma all --tab-width 4 --write"
         ]
     },
-
     "husky": {
-      "hooks": {
-        "pre-commit": "lint-staged"
-      }
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     },
-
     "devDependencies": {
+        "bcryptjs": "^3.0.2",
+        "express-validator": "^7.2.1",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.2",
+        "method-override": "^3.0.0",
+        "mongoose": "^8.16.4",
         "nodemon": "^3.1.10",
         "prettier": "^3.6.2",
         "sass": "^1.89.2"
     },
     "dependencies": {
+        "connect-flash": "^0.1.1",
         "express": "^5.1.0",
         "express-handlebars": "^8.0.3",
+        "express-session": "^1.18.2",
         "morgan": "^1.10.0"
     }
 }

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Carousel Layout</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .login-section {
+            flex: 0 0 30vw;
+            height: 100vh;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            position: relative; /* Quan trọng cho nút back */
+        }
+
+        .login-content {
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .carousel-section {
+            flex: 1;
+            height: 100vh;
+            background-color: #f0f2f5;
+            overflow: hidden;
+        }
+
+        /* --- Custom CSS cho Form Login --- */
+        .login-content h2 {
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        p {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        p a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        p a:hover {
+            text-decoration: underline;
+        }
+        .social-login {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-login a {
+            color: #555;
+            text-decoration: none;
+            font-size: 1.8em;
+        }
+        .social-login .fab.fa-google {
+            color: #DB4437;
+        }
+        .social-login .fab.fa-facebook-f {
+            color: #1877F2;
+        }
+
+        /* --- Custom CSS cho Carousel --- */
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- Nút Back --- */
+        .btn-back {
+            position: absolute; /* Vị trí tuyệt đối so với .login-section */
+            top: 20px;
+            left: 20px;
+            z-index: 10; /* Đảm bảo nút nằm trên các element khác */
+            color: #333; /* Màu icon */
+            font-size: 1.5em; /* Kích thước icon */
+            text-decoration: none;
+            background: none; /* Không có nền */
+            border: none; /* Không có viền */
+            cursor: pointer;
+            padding: 0; /* Loại bỏ padding mặc định của button */
+        }
+        .btn-back:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+        /* Ẩn nút back trên màn hình nhỏ nếu cần */
+        @media (max-width: 768px) {
+            .btn-back {
+                display: block; /* Hiện nút back trên di động */
+            }
+            .login-section {
+                flex-direction: column; /* Đảm bảo phần login xếp dọc trên di động */
+                height: auto;
+                min-height: 50vh;
+            }
+            .carousel-section {
+                height: 50vh;
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="login-section">
+            <button class="btn-back" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> </button>
+            
+            <div class="login-content">
+                <h2>Welcome Back!</h2>
+                <form method = "POST" action = "/auth/login"> 
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input name="username" type="text" id="username" class="form-control" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" id="password" class="form-control" placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p>Don't have an account? <a href="/auth/register">Register</a></p>
+                <p>Forgot your password? <a href="/forgot-password">Reset Password</a></p>
+                <div class="social-login">
+                    <a href="/auth/google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="/auth/facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-section">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../../../public/img/study.jpg" class="d-block w-100" alt="Slide 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../../public/img/study_1.jpg" class="d-block w-100" alt="Slide 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../../public/img/study_2.jpg" class="d-block w-100" alt="Slide 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
