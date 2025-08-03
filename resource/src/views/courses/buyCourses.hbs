@@ -1,0 +1,50 @@
+<div class="mt-4">
+    <div class="container-custome">
+        <div class="col-sm-8">
+            <h1>Courses buying</h1>
+            <div class="info-course">
+                <p>Name course: {{course.name}}</p>
+                <p>Description: {{course.description}}</p>
+                <p>Price: {{course.price}}</p>
+            </div>
+            <h3>Other Courses</h3>
+            <div class="list-course-other">
+                {{#each listCourse}}
+                    <div class="col-sm-6 col-lg-4 mt-3"> 
+                        <div class="card card-course-item">
+                            <a href="/courses/{{this.slug}}">
+                                <img src="{{this.image}}" class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <a href="/courses/{{this.slug}}" class="text-decoration-none text-dark">
+                                    <h5 class="card-title">{{this.name}}</h5>
+                                </a>
+                                <p class="card-text">{{this.description}}</p>
+                                <a href="/courses/{{this.slug}}" class="btn btn-primary mt-2">Buy</a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="list-lessons">
+                <ul>
+                    {{#each listLesson}}
+                        <li>
+                            <a href="/courses/{{course.slug}}/{{this.name}}">
+                                <div class="lesson">
+                                    <p>{{this.index}}. {{this.name}}</p>
+                                    <p>{{this.videoDuration}}</p>
+                                </div>
+                            </a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</div>

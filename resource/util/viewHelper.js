@@ -24,8 +24,13 @@ function setupViewHelpers(app) {
         res.locals.error_msg = req.flash('error'); // Hoặc 'error_msg'
         res.locals.errors = req.flash('errors'); // Đối với express-validator errors
 
-        // ... (Thêm các biến global khác cho views vào res.locals nếu cần)
-        // res.locals.currentUser = req.user; // Ví dụ nếu bạn dùng Passport.js
+        // --- PHẦN CẦN THÊM HOẶC KIỂM TRA ---
+        // Lấy thông tin người dùng từ session và đặt vào res.locals.userInfor
+        // Dữ liệu này sẽ tự động được truyền vào tất cả các template Handlebars
+        res.locals.userInfor = req.session.user || null; 
+        // Nếu req.session.user không tồn tại (chưa đăng nhập), gán null
+        // để tránh lỗi khi truy cập các thuộc tính của nó trong template.
+        // --- KẾT THÚC PHẦN CẦN THÊM HOẶC KIỂM TRA ---
 
         next(); // Quan trọng: chuyển quyền điều khiển cho middleware/route tiếp theo
     });

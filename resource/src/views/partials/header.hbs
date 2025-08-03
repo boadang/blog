@@ -1,46 +1,62 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="../../../public/img/logo.png" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Ecourse</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Course
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Full stack</a></li>
-            <li><a class="dropdown-item" href="#">FE</a></li>
-            <li><a class="dropdown-item" href="#">BE</a></li>
-            <li><a class="dropdown-item" href="#">BA</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">the other courses</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a href="/profile">
-            <img src="../../../public/img/personal.png" alt="">
-            <p>John</p>
-          </a>
-        </li>
-      </ul>
+<link rel="stylesheet" href="/css/partials/header.module.css">
+<div class="navbar">
+  <div class="logo-item d-flex common-item">
+    <img src="img/logo.png" alt="Logo page">
+    <p>EoAb</p>
+  </div>
 
+  <div class="list-item d-flex justify-content-betweeen align-item-center common-item">
+    <div class="item">
+      <div class="content-item">
+        <a href="" class="text-decoration-none">Home</a> 
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="content-item">
+        <a href="" class="text-decoration-none dropdown-toggle">Course <i class="fas fa-caret-down"></i></a> 
+      </div>
+      <div class="dropdown-menu">
+        <a href="/courses/web-development" class="text-decoration-none dropdown-item">Phát triển Web</a>
+        <a href="/courses/data-science" class="text-decoration-none dropdown-item">Khoa học Dữ liệu</a>
+        <a href="/courses/mobile-development" class="text-decoration-none dropdown-item">Phát triển Mobile</a>
+        <a href="/courses/devops" class="text-decoration-none dropdown-item">DevOps</a>
+        <a href="/courses/all" class="text-decoration-none dropdown-item">Tất cả Khóa học</a>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="content-item">
+        <a href="" class="text-decoration-none">Blog</a> 
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="content-item">
+        <a href="" class="text-decoration-none">Community</a> 
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="content-item">
+        <a href="" class="text-decoration-none">About Us</a> 
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="content-item">
+        <a href="" class="text-decoration-none">Contact</a> 
+      </div>
     </div>
   </div>
-</nav>
+
+  <div class="user-item d-flex common-item">
+      {{#unless userInfor}}
+        <button><a href="/auth/login" class="text-decoration-none">Sign in</a></button>
+        <button><a href="/auth/register" class="text-decoration-none">Sign up</a></button>
+        {{else}}
+          <img src="{{userInfor.image}}" alt="img of user">
+          <button>{{userInfor.lastName}} {{userInfor.firstName}}</button>
+      {{/unless}}
+  </div>
+</div>

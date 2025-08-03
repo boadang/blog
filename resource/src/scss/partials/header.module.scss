@@ -1,0 +1,174 @@
+.navbar {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #ADD8E6;
+    min-height: 80px;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.common-item {
+    height: 90%;
+}
+
+.logo-item {
+    width: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-item img{
+    width: 40%;
+}
+
+.logo-item p{
+    width: 50%;
+    text-align: center;
+    font-size: 1.5rem;
+    padding-top: 10px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+// ================================== LOGO-ITEM===========================
+
+.list-item {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-item a {
+    font-weight: bold;
+    color: #2767a2;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    display: inline-block;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        border-radius: 0.2px;
+        background-color: #404f5d;
+        bottom: 0;
+        left: 0;
+        transition: width 0.3s ease, opacity 0.3s ease; 
+        width: 0;
+        opacity: 0;
+    }
+
+    &:hover::before {
+        width: 100%; /* Khi hover thì hiển thị */
+        opacity: 1;
+    }
+}
+
+
+.list-item .item {
+    position: relative; // RẤT QUAN TRỌNG CHO DROPDOWN
+    // Giữ nguyên các thuộc tính khác của .item nếu có
+}
+
+/* Kiểu cho icon mũi tên (nếu bạn dùng Font Awesome) */
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px; // Khoảng cách giữa chữ và icon
+    cursor: pointer; // Biểu tượng con trỏ để gợi ý có thể click
+}
+
+/* Kiểu cho dropdown menu */
+.dropdown-menu {
+    display: none; // Mặc định ẩn dropdown
+    position: absolute; // Định vị tương đối với .item cha
+    background-color: #f9f9f9; // Màu nền của dropdown
+    min-width: 180px; // Chiều rộng tối thiểu
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); // Đổ bóng nhẹ
+    z-index: 1000; // Đảm bảo dropdown hiển thị trên các nội dung khác
+    border-radius: 5px;
+    padding: 5px 0; // Padding bên trong dropdown
+    top: 100%; // Đặt ngay dưới .item cha
+    left: 0; // Căn lề trái với .item cha
+    margin-top: 5px; // Tạo một chút khoảng cách với item cha
+    white-space: nowrap; // Ngăn không cho các mục xuống dòng
+}
+
+/* Kiểu cho từng mục trong dropdown */
+.dropdown-item {
+    color: #333; // Màu chữ
+    padding: 12px 16px; // Padding
+    text-decoration: none; // Bỏ gạch chân
+    display: block; // Mỗi mục là một khối
+    font-weight: normal; // Đảm bảo font-weight bình thường, không đậm
+    transition: background-color 0.3s ease, color 0.3s ease; // Hiệu ứng chuyển động
+}
+
+.dropdown-item:hover {
+    background-color: #ddd; // Màu nền khi hover
+    color: #2767a2; // Có thể đổi màu chữ khi hover
+}
+
+/* Quy tắc để hiển thị dropdown khi hover */
+.item:hover .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Optional: Hiệu ứng xoay mũi tên khi hover */
+.item:hover .dropdown-toggle .fa-caret-down {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+.dropdown-toggle .fa-caret-down {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+// ================= LIST-ITEM =======================
+
+.user-item {
+    width: 12%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.user-item button {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: #6499c3;
+    height: 100%;
+    width: 45%;
+    transition: all 0.5s ease;
+
+    &:hover{
+        background-color: #404f5d;
+        transition: all 0.5s ease;
+    }
+
+    &:hover a{
+        color: #fff;
+        transition: all 0.5s ease;
+    }
+}
+
+.user-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+

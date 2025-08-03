@@ -1,11 +1,14 @@
 const Course = require('../models/Course');
+const Lesson = require('../models/Lesson');
 const { multipleMongooseObjects, mongooseObject } = require('../../util/Mongoose');
+const renderWithDefaultValue = require('../../util/renderHelper');
 
 class CoursesController {
     //[GET] /courses/:slug
     show(req, res, next) {
         Course.findOne({slug: req.params.slug})
             .then(course => {
+                renderWithDefaultValue(res, 'courses/show', {showHeader: true, showFooter: true, course: mongooseObject(course)});
                 res.render('courses/show', { course: mongooseObject(course) });
             })
             .catch(next);
@@ -13,7 +16,10 @@ class CoursesController {
 
     //[GET] /courses/create
     create(req, res, next) {
-        res.render('courses/create');
+        renderWithDefaultValue(res,'courses/create', {
+            showHeader: true,
+            showFooter: true,
+        });
     }
 
     //[POST] courses/store
@@ -24,15 +30,13 @@ class CoursesController {
         console.log(course);
         course.save();
         
-        res.render('courses/create');
+        renderWithDefaultValue(res, 'courses/create', {showHeader: true, showFooter: true , course: mongooseObject(course)});
     }
 
     index(req, res, next) {
         Course.find({})
             .then(courses => {
-                res.render('admin/home', {
-                    courses: multipleMongooseObjects(courses)
-                })
+                renderWithDefaultValue(res, 'courses/create', {showHeader: true, showFooter: true , course: mongooseObject(course)});
             })
             .catch(next);
     }
@@ -62,6 +66,42 @@ class CoursesController {
         Course.updateOne({_id:req.params.id}, req.body)
             .then(() => res.redirect('/courses/listCourses'))
             .catch(next);
+    }
+
+    buyCourse(req,res,next) {
+        let courseData;
+
+        Course.findOne({slug: req.params.slug})
+            .then(course => {
+                console.log(course);
+                if(!course) return res.status(404).send("No courses !");
+
+                courseData = course;
+
+                return Course.find({slug:{$ne: courseData}}).limit(5);
+            })
+            .then(listCourse => {
+                console.log(listCourse);
+                renderWithDefaultValue(res, 'courses/buyCourses', {
+                    course: mongooseObject(courseData),
+                    listCourse: multipleMongooseObjects(listCourse)
+                })
+            })
+            .catch(next);
+
+        // Promise.all([
+        //     Course.findOne({_slug: courseData}),
+        //     Course.find({_slug: {$ne: courseData}}).limit(5)
+        // ])
+        //     .then(([course, listCourse]) => {
+        //         if(!course) return res.status(404).send('No courses !');
+
+        //         renderWithDefaultValue(res, 'courses/buyCourses', {
+        //             course: mongooseObject(course),
+        //             listCourse: multipleMongooseObjects(listCourse)
+        //         });
+        //     })
+        //     .catch(next);
     }
 }
 
